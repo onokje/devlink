@@ -1,0 +1,50 @@
+services:
+#    noq_devlink.example:
+#        class: Noq\DevlinkBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    Noq\DevlinkBundle\Command\LoadCommand:
+        arguments:
+            $directoryValidator: '@Noq\DevlinkBundle\Service\DirectoryValidator'
+            $configFileManager: '@Noq\DevlinkBundle\Service\ConfigFileManager'
+            $composerFileLocator: '@Noq\DevlinkBundle\Service\ComposerFileLocator'
+
+        tags: ['console.command']
+
+    Noq\DevlinkBundle\Command\RemoveCommand:
+        arguments:
+            $directoryValidator: '@Noq\DevlinkBundle\Service\DirectoryValidator'
+            $configFileManager: '@Noq\DevlinkBundle\Service\ConfigFileManager'
+        tags: ['console.command']
+
+    Noq\DevlinkBundle\Command\LinkCommand:
+        arguments:
+            - '@Noq\DevlinkBundle\Service\LocalProjectManager'
+            - '@Noq\DevlinkBundle\Service\ComposerParser'
+            - '@Noq\DevlinkBundle\Service\ComposerFileLocator'
+            - '@Noq\DevlinkBundle\Service\SymlinkManager'
+        tags: ['console.command']
+
+    Noq\DevlinkBundle\Command\UnlinkCommand:
+        arguments:
+            - '@Noq\DevlinkBundle\Service\LocalProjectManager'
+            - '@Noq\DevlinkBundle\Service\ComposerParser'
+            - '@Noq\DevlinkBundle\Service\ComposerFileLocator'
+            - '@Noq\DevlinkBundle\Service\SymlinkManager'
+        tags: ['console.command']
+
+    Noq\DevlinkBundle\Service\DirectoryValidator: ~
+
+    Noq\DevlinkBundle\Service\ConfigFileManager: ~
+
+    Noq\DevlinkBundle\Service\ComposerFileLocator: ~
+
+    Noq\DevlinkBundle\Service\ComposerParser: ~
+
+    Noq\DevlinkBundle\Service\SymlinkManager: ~
+
+    Noq\DevlinkBundle\Service\LocalProjectManager:
+        arguments:
+            - '@Noq\DevlinkBundle\Service\ComposerFileLocator'
+            - '@Noq\DevlinkBundle\Service\ComposerParser'
+            - '@Noq\DevlinkBundle\Service\ConfigFileManager'

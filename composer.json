@@ -1,0 +1,18 @@
+{
+    "name": "onokje/devlink",
+    "description": "Creates symlinks for your libraries or bundles while working on them in a project",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "onok",
+            "email": "onokje@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Noq\\DevlinkBundle\\": "src"
+        }
+    },
+    "require": {}
+}
